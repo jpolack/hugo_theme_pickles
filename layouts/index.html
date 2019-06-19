@@ -1,5 +1,7 @@
 {{ partial "header.html" . }}
-{{ range $index, $page := (.Paginate (where (where .Data.Pages "Type" "posts") ".Params.hidden" "!=" "true" )).Pages }}
+{{ $page := (.Paginate (where (where .Data.Pages "Type" "posts") ".Params.hidden" "!=" "true" )).Pages }}
+{{ $sortedPage := sort $page "Date" "desc"}}
+{{ range $index,  $sortedPage}}
 {{ if ne $index 0 }}
 {{ end }}
 {{ .Render "li" }}
